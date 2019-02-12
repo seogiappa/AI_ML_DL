@@ -1,0 +1,30 @@
+import random
+from operator import itemgetter
+from collections import Counter
+import time
+start_time = time.time()
+
+print ("로또복권 숫자 발생기 프로그램입니다.\n가장 많이 나오는 숫자 여섯개를 선택하시면 됩니다.")
+
+result = []
+while True:
+
+    InputNums = int(input("몇 번을 돌릴까요? 예, 1000, 10000, 100000 ... 100만번에 약 15초 걸립니다."))
+    Nums = InputNums + 1
+    for i in range(1,Nums):            #1백만번 약 14초, 1천만번 약 150초
+        start_time = time.time()
+        randomNumber = random.sample(range(1,46),6)
+        result.extend(randomNumber)        # 값을 연이어 붙일 때는 extend, append를 쓰면 안됨
+        count = Counter(result)
+        sorted_Result = sorted(count.items(), key=itemgetter(1), reverse=True) 
+        # itemgetter 0은 key 값으로 소팅, 1은 2번째인 value로 소팅, reverse의 True는 내림차순, False는 오름차순
+    
+    for i in sorted_Result:
+        print (i)
+    print("--- 소요시간은 %s seconds ---" %(time.time() - start_time))
+    Ans = input ("한 번 더 돌려보시겠습니까? Y or N")
+    if Ans == "Y" or Ans == "y" or Ans == "yes" or Ans == "Yes" or Ans == "YES" :
+        print ("yes")
+    else :
+        print ("수고하셨습니다")
+        break

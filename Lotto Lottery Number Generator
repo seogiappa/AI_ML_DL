@@ -4,27 +4,26 @@ from collections import Counter
 import time
 start_time = time.time()
 
-print ("로또복권 숫자 발생기 프로그램입니다.\n가장 많이 나오는 숫자 여섯개를 선택하시면 됩니다.")
+print ("Lottery Lottery Number Generator program. \n You can choose the six most common numbers.")
 
 result = []
 while True:
 
-    InputNums = int(input("몇 번을 돌릴까요? 예, 1000, 10000, 100000 ... 100만번에 약 15초 걸립니다."))
+    InputNums = int(input("How many times do I turn it? For example, 1000, 10000, 100000 ... it takes about 15 seconds for 1 million times."))
     Nums = InputNums + 1
-    for i in range(1,Nums):            #1백만번 약 14초, 1천만번 약 150초
+    for i in range(1,Nums):            #About 1 million times about 14 seconds, about 150 seconds about 10 million times
         start_time = time.time()
         randomNumber = random.sample(range(1,46),6)
-        result.extend(randomNumber)        # 값을 연이어 붙일 때는 extend, append를 쓰면 안됨
+        result.extend(randomNumber)        # Do not use append, but extend
         count = Counter(result)
         sorted_Result = sorted(count.items(), key=itemgetter(1), reverse=True) 
-        # itemgetter 0은 key 값으로 소팅, 1은 2번째인 value로 소팅, reverse의 True는 내림차순, False는 오름차순
-    
+        # itemgetter 0 is sorted by key value, 1 is sorted by value that is 2nd, reverse is sorted in descending order, False is sorted in ascending order    
     for i in sorted_Result:
         print (i)
-    print("--- 소요시간은 %s seconds ---" %(time.time() - start_time))
-    Ans = input ("한 번 더 돌려보시겠습니까? Y or N")
+    print("--- Spent time %s seconds ---" %(time.time() - start_time))
+    Ans = input ("Would you like to run it one more time? Y or N")
     if Ans == "Y" or Ans == "y" or Ans == "yes" or Ans == "Yes" or Ans == "YES" :
         print ("yes")
     else :
-        print ("수고하셨습니다")
+        print ("Thanks")
         break
